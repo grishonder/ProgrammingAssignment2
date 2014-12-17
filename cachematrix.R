@@ -1,8 +1,8 @@
 ## Motivation : Function create a list of 4 functions,
 ## which can be aplied to any type  of objects.
 ## When we need to caching some CPU consumed operation 
-## I.e  A -> some CPU consumed function -> B, were A is sorce of data 
-## and B is result of function aplied to A  
+## I.e  A -> some CPU consumed function -> B, 
+## were A is sorce of data and B is result of function aplied to A.
 ## In context of the class and task (Caching the Inverse of a Matrix),
 ## we will use matrix as source type (x),  and iverse matrix of x -> ix
 ##
@@ -14,29 +14,29 @@
 ## note this will remove any previous cacshe of ix
 ## 3 getInverse()  - get the inverse matrix of x, i.e ix or NULL,
 ## if it was not calculated yet 
-## 4 setInverse(ix) set the ix 
+## 4 setInverse(ix) - set the ix 
 
 
-makeCacheMatrix <- function(x = matrix()) {
-        ##initalize with null ( empty ) inverse matrix 
+makeCacheMatrix <- function(x = matrixca()) {
+        ## initalize with null ( empty ) inverse matrix 
         ix <- NULL 
         
         
         set <- function(y) {
-                x <<- y       ##set new matrix 
+                x <<- y       ## set new matrix 
                 ix<<- NULL ## old inverse is no longer valid 
         }
         
         get <- function() { 
-                x  ##just return current matrix
+                x  ## return current matrix (x)
         }
         
         setInverse <- function(newIx = matrix()){
-                ix <<- newIx     ##set new inverse matrix         
+                ix <<- newIx ## #set new inverse matrix         
         }
         
         getInverse <- function() {
-                ix ##just return current invert matrix of X
+                ix ##  return current invert matrix of (x)
         }
         ## return the list of 4 functions     
         list(set = set, get = get,
@@ -63,16 +63,15 @@ makeCacheMatrix <- function(x = matrix()) {
 
 
 cacheSolve <- function(x, ...) {
-        ##Return a matrix that is the inverse of 'x'
         
-        ix <- x$getInverse()  ##1-st get the inverse matrix from x
+        ix <- x$getInverse()  ## 1-st get the inverse matrix from x
         
-        ## if it is null, then  we need to calculate and cache it 
+        ## if it is null, then we need to calculate and cache it 
         if(is.null(ix)) {                         
-                message("calclate inverse matrix and cache it.")
-                data <- x$get() #get the src matrix first 
+                message("calculate inverse matrix and cache it.")
+                data <- x$get() # get the source matrix first (data)
                 ix <- solve(data, ...) ## solve it to obtain inverse of X ->ix 
-                x$setInverse(ix)  #store inverce matrix for future needs          ]
+                x$setInverse(ix)  # store inverse matrix for future needs          
         }
-        ix
+        ix ## return inverse matrix 
 }
