@@ -17,7 +17,7 @@
 ## 4 setInverse(ix) - set the ix 
 
 
-makeCacheMatrix <- function(x = matrixca()) {
+makeCacheMatrix <- function(x = matrix()) {
         ## initalize with null ( empty ) inverse matrix 
         ix <- NULL 
         
